@@ -12,7 +12,7 @@ struct Args
 	@PositionalArgument(0)
 	string filename;
 
-	@(NamedArgument
+	@(NamedArgument(["fields", "f"])
 			.Validation!((int value) {
 				if (value > 0)
 					return true;
@@ -22,10 +22,10 @@ struct Args
 			})
 			.Required()
 	)
-	int f;
+	int[] fields;
 
-	@(NamedArgument)
-	char d = '\t';
+	@(NamedArgument(["delimiter", "d"]))
+	char delimiter = '\t';
 }
 
 int main(string[] argv)
@@ -38,12 +38,12 @@ int main(string[] argv)
 	try
 	{
 		File file = File(args.filename, "r");
-		foreach (i, line; file.byLine().map!(a => a.split(args.d)).enumerate)
+		foreach (elements; file.byLine().map!(a => a.split(args.delimiter)))
 		{
-			if (line.length >= args.f)
-			{
-				line[args.f - 1].writeln;
-			}
+			args.fields.map!(idx => (idx <= elements.length ? elements[
+						idx - 1
+					] : "")).join(args.delimiter).writeln;
+
 		}
 	}
 	catch (ErrnoException)
