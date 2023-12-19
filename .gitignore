@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/cccut
+cccut.so
+cccut.dylib
+cccut.dll
+cccut.a
+cccut.lib
+cccut-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
