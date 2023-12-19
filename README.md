@@ -71,12 +71,12 @@ f0
 
 In this step your goal is to add support for the -f option. This option specifies a list of fields to be printed out. Output fields are separated by a single occurrence of the field delimiter character.
 
-The field list is a comma or whitespace separated list of fields, i.e. `-f1 2`. The first field is field number 1.
+The field list is a comma or whitespace separated list of fields, i.e. `-f 1 2`. The first field is field number 1.
 
 Here’s a couple of tests on this:
 
 ```shell
-cccut -f1 2 sample.tsv
+cccut -f 1 2 sample.tsv
 f0      f1
 0       1
 5       6
@@ -88,7 +88,7 @@ f0      f1
 &
 
 ```shell
-cccut --delimiter , -f1 2 fourchords.csv | head -n5
+cccut --delimiter , -f 1 2 fourchords.csv | head -n5
 Song title,Artist
 "10000 Reasons (Bless the Lord)",Matt Redman and Jonas Myrin
 "20 Good Reasons",Thirsty Merc
@@ -101,7 +101,7 @@ Song title,Artist
 In this step your goal is to support reading from the standard input stream if no filename is provided or if the single dash is provided ‘-’.
 
 ```shell
-tail -n5 fourchords.csv | cccut --delimiter , -f1 2
+tail -n5 fourchords.csv | cccut --delimiter , -f 1 2
 "Young Volcanoes",Fall Out Boy
 "You Found Me",The Fray
 "You'll Think Of Me",Keith Urban
@@ -112,7 +112,7 @@ tail -n5 fourchords.csv | cccut --delimiter , -f1 2
 or
 
 ```shell
-tail -n5 fourchords.csv| cccut --delimiter , -f1 2 -
+tail -n5 fourchords.csv| cccut --delimiter , -f 1 2 -
 "Young Volcanoes",Fall Out Boy
 "You Found Me",The Fray
 "You'll Think Of Me",Keith Urban
