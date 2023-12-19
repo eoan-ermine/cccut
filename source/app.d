@@ -9,8 +9,8 @@ import std.range;
 
 struct Args
 {
-	@PositionalArgument(0)
-	string filename;
+	@(PositionalArgument(0).Optional())
+	string filename = "stdin";
 
 	@(NamedArgument(["fields", "f"])
 			.Validation!((int value) {
@@ -37,7 +37,7 @@ int main(string[] argv)
 
 	try
 	{
-		File file = File(args.filename, "r");
+		File file = args.filename == "stdin" ? stdin : File(args.filename, "r");
 		foreach (elements; file.byLine().map!(a => a.split(args.delimiter)))
 		{
 			args.fields.map!(idx => (idx <= elements.length ? elements[
