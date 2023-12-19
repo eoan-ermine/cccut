@@ -23,6 +23,9 @@ struct Args
 			.Required()
 	)
 	int f;
+
+	@(NamedArgument)
+	char d = '\t';
 }
 
 int main(string[] argv)
@@ -35,7 +38,7 @@ int main(string[] argv)
 	try
 	{
 		File file = File(args.filename, "r");
-		foreach (i, line; file.byLine().map!(a => a.split("\t")).enumerate)
+		foreach (i, line; file.byLine().map!(a => a.split(args.d)).enumerate)
 		{
 			if (line.length >= args.f)
 			{
