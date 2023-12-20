@@ -32,6 +32,12 @@ int main(string[] argv)
 {
 	Args args;
 
+	// Allow trailing '-'
+	if (argv[$ - 1] == "-")
+	{
+		argv = argv[0 .. $ - 1];
+	}
+
 	if (!CLI!Args.parseArgs(args, argv[1 .. $]))
 		return 1;
 
